@@ -1,0 +1,21 @@
+workflows:
+  android-apk:
+    name: Build Android APK
+    instance_type: linux_x2
+
+    environment:
+      flutter: stable
+
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          cd frontend
+          flutter pub get
+
+      - name: Build release APK
+        script: |
+          cd frontend
+          flutter build apk --release
+
+    artifacts:
+      - frontend/build/app/outputs/flutter-apk/app-release.apk
